@@ -16,9 +16,9 @@ composer require archielite/laravel-heroicons
 ## Usage
 
 ```php
-<x-heroicons::icon-o icon="name" />
-<x-heroicons::icon-m icon="name" />
-<x-heroicons::icon-s icon="name" />
+<x-heroicons::icon-20-solid icon="name" />
+<x-heroicons::icon-24-solid icon="name" />
+<x-heroicons::icon-24-outline icon="name" />
 ```
 
 ### Testing
