@@ -39,7 +39,7 @@ foreach (glob($baseFolder . '/24/**/*.svg') as $filename) {
     $explodedNames = explode('/', $pathWithoutBase);
     $name = str_replace('.svg', '', $explodedNames[2]) . '-' . ($explodedNames[1] === 'solid' ? 's' : 'o') . '.blade.php';
 
-    $to = __DIR__ . '/../resources/views/components/icons/' . $name;
+    $to = __DIR__ . '/../resources/views/components/' . $name;
 
     echo "-> $to \n";
 

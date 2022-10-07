@@ -18,8 +18,8 @@ composer require archielite/laravel-heroicons
 ```php
 <x-heroicons::icon name="user-o" />
 <x-heroicons::icon name="user-s" />
-<x-heroicons::icons.user-o />
-<x-heroicons::icons.user-s />
+<x-heroicons::user-o />
+<x-heroicons::user-s />
 ...
 ```
 
