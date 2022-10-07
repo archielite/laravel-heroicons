@@ -1,9 +1,9 @@
-# Very short description of the package
+# Heroicons Blade Components
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/archielite/laravel-heroicons.svg?style=flat-square)](https://packagist.org/packages/archielite/laravel-heroicons)
 [![Total Downloads](https://img.shields.io/packagist/dt/archielite/laravel-heroicons.svg?style=flat-square)](https://packagist.org/packages/archielite/laravel-heroicons)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This package allows you to using Heroicons as a blade component.
 
 ## Installation
 
@@ -16,7 +16,9 @@ composer require archielite/laravel-heroicons
 ## Usage
 
 ```php
-// Usage description here
+<x-heroicons::icon-o icon="name" />
+<x-heroicons::icon-m icon="name" />
+<x-heroicons::icon-s icon="name" />
 ```
 
 ### Testing
