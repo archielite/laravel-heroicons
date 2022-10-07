@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Illuminate\Filesystem\Filesystem;
+
+$filesystem = new Filesystem();
+
+$tempFile = __DIR__ . '/temp.zip';
+
+echo 'Downloading the last icons...' . PHP_EOL;
+
+file_put_contents($tempFile, file_get_contents('https://github.com/tailwindlabs/heroicons/archive/refs/heads/master.zip'));
+
+echo 'Downloaded. Extracting the archive...' . PHP_EOL;
+
+$zip = new ZipArchive;
+
+if ($zip->open($tempFile) === true) {
+    $zip->extractTo(__DIR__ . '/temp');
+    $zip->close();
+    echo 'Extracted successfully. Updating the blade components...' . PHP_EOL;
+
+    $filesystem->delete($tempFile);
+} else {
+    echo 'Failed!';
+    exit;
+}
+
+$baseFolder = __DIR__ . '/temp/heroicons-master/optimized';
+$sizes = [
+    20 => ['solid'],
+    24 => ['outline', 'solid'],
+];
+
+foreach (glob($baseFolder . '/**/**/*.svg') as $filename) {
+    $pathWithoutBase = str_replace($baseFolder . '/', '', $filename);
+    $explodedNames = explode('/', $pathWithoutBase);
+
+    $to = __DIR__ . '/../resources/views/components/icons/' . str_replace('.svg', '.blade.php', str_replace('/', '-', $pathWithoutBase));
+
+    echo "-> $to \n";
+
+    copy($filename, $to);
+}
+
+echo 'Cleanup files...' . PHP_EOL;
+
+$filesystem->deleteDirectory(__DIR__ . '/temp');
+
+echo 'Done!';
