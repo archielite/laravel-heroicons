@@ -11,7 +11,7 @@ class LaravelHeroiconsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'heroicons');
     }
 
     /**
