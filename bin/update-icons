@@ -42,7 +42,9 @@ foreach (glob($baseFolder . '/**/**/*.svg') as $filename) {
 
     echo "-> $to \n";
 
-    copy($filename, $to);
+    $content = $filesystem->get($filename);
+    $content = trim(preg_replace('/<svg.*?>(.*)?<\/svg>/ims', '$1', $content));
+    $filesystem->put($to, $content . PHP_EOL);
 }
 
 echo 'Cleanup files...' . PHP_EOL;
