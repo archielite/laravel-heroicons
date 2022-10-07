@@ -16,15 +16,11 @@ composer require archielite/laravel-heroicons
 ## Usage
 
 ```php
-<x-heroicons::icon-20-solid icon="name" />
-<x-heroicons::icon-24-solid icon="name" />
-<x-heroicons::icon-24-outline icon="name" />
-```
-
-### Testing
-
-```bash
-composer test
+<x-heroicons::icon name="user-o" />
+<x-heroicons::icon name="user-s" />
+<x-heroicons::icons.user-o />
+<x-heroicons::icons.user-s />
+...
 ```
 
 ### Changelog

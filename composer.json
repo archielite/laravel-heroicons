@@ -22,8 +22,6 @@
     },
     "require-dev": {
         "ext-zip": "*",
-        "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.0",
         "illuminate/filesystem": "^8.0|^9.0"
     },
     "autoload": {
@@ -31,14 +29,8 @@
             "ArchiElite\\LaravelHeroicons\\": "src"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "ArchiElite\\LaravelHeroicons\\Tests\\": "tests"
-        }
-    },
     "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "update-icons": "bin/update-icons"
 
     },
     "config": {
