@@ -1,0 +1,51 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Illuminate\Filesystem\Filesystem;
+
+$filesystem = new Filesystem();
+
+$template = <<<'HTML'
+<tr class="hover:bg-gray-100">
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+        {icon}
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+        <div>
+            <code>&ltx-heroicons::icon name="{icon}"/&gt;</code>
+            <button class="copy-btn inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" data-clipboard-text='<x-heroicons::icon name="{icon}"/>'>Copy</button>
+        </div>
+        <div>
+            <code>&ltx-heroicons::{icon}/&gt;</code>
+            <button class="copy-btn inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" data-clipboard-text='<x-heroicons::{icon}/>'>Copy</button>
+        </div>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+            <span class="inline-block svg-icon h-6 w-6">{svg}</span>
+        </td>
+    </td>
+</tr>
+
+HTML;
+
+$icons = [];
+
+foreach (glob(__DIR__ . '/../resources/views/components/*.blade.php') as $filename) {
+    if (str_contains($filename, 'icon.blade.php')) {
+        continue;
+    }
+
+    $name = $filesystem->basename($filename);
+    $name = str_replace('.blade.php', '', $name);
+    $icon = str_replace('{icon}', $name, $template);
+    $icon = str_replace('{svg}', $filesystem->get($filename), $icon);
+    $icons[] = $icon;
+}
+
+$stub = $filesystem->get(__DIR__ . '/../resources/html/example.html');
+$output = str_replace('{icons}', implode("\n", $icons), $stub);
+
+$filesystem->put(__DIR__ . '/../example/index.html', $output);
+
+echo 'Done.' . PHP_EOL;
