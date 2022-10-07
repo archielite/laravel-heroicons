@@ -30,8 +30,8 @@
         }
     },
     "scripts": {
-        "update-icons": "bin/update-icons"
-
+        "update-icons": "bin/update-icons",
+        "update-example": "bin/update-example"
     },
     "config": {
         "sort-packages": true
